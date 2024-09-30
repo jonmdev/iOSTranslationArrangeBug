@@ -1,10 +1,5 @@
 ﻿using Microsoft.Maui.Layouts;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace iOSTranslationArrangeBug {
 
@@ -60,7 +55,6 @@ namespace iOSTranslationArrangeBug {
                 measuredWidth = Math.Max(measuredWidth, bounds.Left + width);
             }
 
-            //NOT SURE HOW TO REMOVE THIS - SEEMS NECESSARY
             var finalHeight = ResolveConstraints(heightConstraint, customAbsoluteLayout.Height, measuredHeight, customAbsoluteLayout.MinimumHeight, customAbsoluteLayout.MaximumHeight);
             var finalWidth = ResolveConstraints(widthConstraint, customAbsoluteLayout.Width, measuredWidth, customAbsoluteLayout.MinimumWidth, customAbsoluteLayout.MaximumWidth);
 
@@ -89,23 +83,12 @@ namespace iOSTranslationArrangeBug {
                 }
 
                 var destination = customAbsoluteLayout.GetLayoutBounds(child);
-                //var flags = customAbsoluteLayout.GetLayoutFlags(child);
-
-                //bool isWidthProportional = HasFlag(flags, AbsoluteLayoutFlags.WidthProportional);
-                //bool isHeightProportional = HasFlag(flags, AbsoluteLayoutFlags.HeightProportional);
+                
                 bool isWidthProportional = false;
                 bool isHeightProportional = false;
 
                 destination.Width = ResolveDimension(isWidthProportional, destination.Width, availableWidth, child.DesiredSize.Width);
                 destination.Height = ResolveDimension(isHeightProportional, destination.Height, availableHeight, child.DesiredSize.Height);
-
-                //if (HasFlag(flags, AbsoluteLayoutFlags.XProportional)) {
-                //    destination.X = (availableWidth - destination.Width) * destination.X;
-                //}
-
-                //if (HasFlag(flags, AbsoluteLayoutFlags.YProportional)) {
-                //    destination.Y = (availableHeight - destination.Height) * destination.Y;
-                //}
 
                 destination.X += left;
                 destination.Y += top;
